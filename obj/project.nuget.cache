@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7HKPlrmT+sw=",
+  "dgSpecHash": "i/u3i+B6+vQ=",
   "success": true,
-  "projectFilePath": "C:\\Dev\\BACKEND\\CadastroProdutos\\CadastroProdutos.csproj",
+  "projectFilePath": "C:\\Dev\\BACKEND\\CadastroProdutos\\CadastroProdutos\\CadastroProdutos.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Gil\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.8\\microsoft.aspnetcore.openapi.9.0.8.nupkg.sha512",
     "C:\\Users\\Gil\\.nuget\\packages\\microsoft.openapi\\1.6.25\\microsoft.openapi.1.6.25.nupkg.sha512",

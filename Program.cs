@@ -62,7 +62,7 @@ app.MapGet("/produtos/{id}", (int id) =>
 {
     var produto = Produtos.FirstOrDefault((x) => x.Id == id);
 
-    if( produto != null)
+    if (produto != null)
     {
         return Results.Ok(produto);
     }
@@ -72,6 +72,52 @@ app.MapGet("/produtos/{id}", (int id) =>
     }
 });
 
+app.MapPost("/produtos", (Produto NovoProduto) =>
+{
+
+    Produtos.Add(NovoProduto);
+
+    return Results.Created();
+
+});
+
+app.MapPut("/produtos{id}", ( int id, Produto produtoAtualizado ) =>
+{
+    var produto = Produtos.FirstOrDefault((x) => x.Id == id);
+    
+    if ( produto is  null)
+    {
+        return Results.NotFound($"Produtos ID:{id} não encontrado ");
+    }
+    else
+    {
+
+        produto.Nome = produtoAtualizado.Nome;
+        produto.Preco = produtoAtualizado.Preco;
+        produto.Estoque = produtoAtualizado.Estoque;
+
+        return Results.Ok($"Produto {produto} Atualizado men");
+    }
+
+});
+
+
+app.MapDelete("/Produtos/{id}", (int id) =>
+{
+
+    var produto = Produtos.FirstOrDefault((x) => x.Id == id);
+
+    if (produto is null)
+    {
+        return Results.NotFound($"Produtos ID:{id} não encontrado ");
+    }
+    else
+    {
+        Produtos.Remove(produto);
+        return Results.Ok($"Produto {produto} Removido");
+    }
+
+});
 
 
 
@@ -85,7 +131,7 @@ record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
 class Produto
 {
     public int Id { get; set; }
-    public string Nome { get; set; } 
+    public string Nome { get; set; } = "";
     public decimal Preco { get; set; }
     public int Estoque { get; set; }
 }

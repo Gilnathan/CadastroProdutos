@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Dev\\BACKEND\\CadastroProdutos\\CadastroProdutos.csproj": {}
+    "C:\\Dev\\BACKEND\\CadastroProdutos\\CadastroProdutos\\CadastroProdutos.csproj": {}
   },
   "projects": {
-    "C:\\Dev\\BACKEND\\CadastroProdutos\\CadastroProdutos.csproj": {
+    "C:\\Dev\\BACKEND\\CadastroProdutos\\CadastroProdutos\\CadastroProdutos.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Dev\\BACKEND\\CadastroProdutos\\CadastroProdutos.csproj",
+        "projectUniqueName": "C:\\Dev\\BACKEND\\CadastroProdutos\\CadastroProdutos\\CadastroProdutos.csproj",
         "projectName": "CadastroProdutos",
-        "projectPath": "C:\\Dev\\BACKEND\\CadastroProdutos\\CadastroProdutos.csproj",
+        "projectPath": "C:\\Dev\\BACKEND\\CadastroProdutos\\CadastroProdutos\\CadastroProdutos.csproj",
         "packagesPath": "C:\\Users\\Gil\\.nuget\\packages\\",
-        "outputPath": "C:\\Dev\\BACKEND\\CadastroProdutos\\obj\\",
+        "outputPath": "C:\\Dev\\BACKEND\\CadastroProdutos\\CadastroProdutos\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
