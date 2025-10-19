@@ -182,23 +182,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Gil\\.nuget\\packages\\": {},
+    "C:\\Users\\gilth\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Dev\\BACKEND\\CadastroProdutos\\CadastroProdutos\\CadastroProdutos.csproj",
+      "projectUniqueName": "C:\\Users\\gilth\\OneDrive\\Documentos\\GitHub\\CadastroProdutos\\CadastroProdutos.csproj",
       "projectName": "CadastroProdutos",
-      "projectPath": "C:\\Dev\\BACKEND\\CadastroProdutos\\CadastroProdutos\\CadastroProdutos.csproj",
-      "packagesPath": "C:\\Users\\Gil\\.nuget\\packages\\",
-      "outputPath": "C:\\Dev\\BACKEND\\CadastroProdutos\\CadastroProdutos\\obj\\",
+      "projectPath": "C:\\Users\\gilth\\OneDrive\\Documentos\\GitHub\\CadastroProdutos\\CadastroProdutos.csproj",
+      "packagesPath": "C:\\Users\\gilth\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\gilth\\OneDrive\\Documentos\\GitHub\\CadastroProdutos\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Gil\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\gilth\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -263,7 +263,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
