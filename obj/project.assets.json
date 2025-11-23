@@ -3599,24 +3599,31 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\juare\\.nuget\\packages\\": {}
+    "C:\\Users\\gilth\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Cursos\\Backend\\CadastroProdutos\\CadastroProdutos.csproj",
+      "projectUniqueName": "C:\\Users\\gilth\\OneDrive\\Documentos\\CadastroProdutos\\CadastroProdutos.csproj",
       "projectName": "CadastroProdutos",
-      "projectPath": "C:\\Cursos\\Backend\\CadastroProdutos\\CadastroProdutos.csproj",
-      "packagesPath": "C:\\Users\\juare\\.nuget\\packages\\",
-      "outputPath": "C:\\Cursos\\Backend\\CadastroProdutos\\obj\\",
+      "projectPath": "C:\\Users\\gilth\\OneDrive\\Documentos\\CadastroProdutos\\CadastroProdutos.csproj",
+      "packagesPath": "C:\\Users\\gilth\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\gilth\\OneDrive\\Documentos\\CadastroProdutos\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\juare\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\gilth\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -3635,7 +3642,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.200"
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net9.0": {
@@ -3691,7 +3698,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.202/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
