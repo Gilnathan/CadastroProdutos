@@ -1,4 +1,11 @@
-using Microsoft.AspNetCore.Http.HttpResults;
+using System.ComponentModel.DataAnnotations;
+using System.Text;
+using CadastroProdutos.Database;
+using CadastroProdutos.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using CadastroProdutos.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +16,61 @@ builder.Services.AddOpenApi();
 builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+//builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(x => 
+{
+    x.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme()
+    {
+        Description = @"Insira o JWT no campo abaixo usando o seguinte formato: Bearer {seu_token}.",
+        Name = "Authorization",
+        In = Microsoft.OpenApi.Models.ParameterLocation.Header,
+        Type = Microsoft.OpenApi.Models.SecuritySchemeType.ApiKey,
+        Scheme = "Bearer"
+    });
+
+    x.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement()
+    {
+        {
+            new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+            {
+                Reference = new Microsoft.OpenApi.Models.OpenApiReference
+                {
+                    Type = Microsoft.OpenApi.Models.ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                },
+                Scheme = "oauth2",
+                Name = "Bearer",
+                In = Microsoft.OpenApi.Models.ParameterLocation.Header
+            },
+            new List<string>()
+        }
+    });
+});
+
+//builder.Services.AddScoped<IProdutosService, ProdutosService>();
+builder.Services.AddScoped<IProdutosService, ProdutosDatabaseService>();
+
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite("Data Source = Produtos.db"));
+
+var jwtConfig = builder.Configuration.GetSection("Jwt");
+var key = Encoding.ASCII.GetBytes(jwtConfig["Key"]);
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = jwtConfig["Issuer"],
+        ValidAudience = jwtConfig["Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(key)
+    };
+});
 
 var app = builder.Build();
 
@@ -19,22 +80,24 @@ app.MapControllers();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
+app.UseAuthorization();
+
 var summaries = new[]
 {
     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
 };
 
-
-
 app.MapGet("/weatherforecast", () =>
 {
-    var forecast = Enumerable.Range(1, 5).Select(index =>
+    var forecast =  Enumerable.Range(1, 5).Select(index =>
         new WeatherForecast
         (
             DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
@@ -46,96 +109,68 @@ app.MapGet("/weatherforecast", () =>
 })
 .WithName("GetWeatherForecast");
 
+app.MapGet("/test", () => "Esse é um endpoint de teste");
 
-app.MapGet("/test", () => "Esse e um EndPoint de teste");
-
-
-var Produtos = new List<Produto>()
+var produtos = new List<Produto>()
 {
-    new Produto(){ Id = 1, Nome = "Mouse sem fio", Preco =40.90M, Estoque = 50 },
-    new Produto(){ Id = 2, Nome = "Teclado sem fio", Preco =20.90M, Estoque = 20 }
+    new Produto() { Id = 1, Nome = "Mouse sem fio", Preco = 99.90M, Estoque = 50 },
+    new Produto() { Id = 2, Nome = "Teclado", Preco = 249.90M, Estoque = 30 }
 };
 
 app.MapGet("/produtos", () =>
 {
-    return Produtos;
+    return produtos;
 });
-
 
 app.MapGet("/produtos/{id}", (int id) =>
 {
-    var produto = Produtos.FirstOrDefault((x) => x.Id == id);
+    var produto = produtos.FirstOrDefault(x => x.Id == id);
 
-    if (produto != null)
-    {
-        return Results.Ok(produto);
-    }
-    else
-    {
-        return Results.NotFound($"Foi mal men, não achei o Produto {id}");
-    }
+    return produto is not null
+        ? Results.Ok(produto)
+        : Results.NotFound($"Produto com ID {id} não encontrado.");
 });
 
-app.MapPost("/produtos", (Produto NovoProduto) =>
+app.MapPost("/produtos", (Produto novoProduto) =>
 {
-
-    Produtos.Add(NovoProduto);
+    produtos.Add(novoProduto);
 
     return Results.Created();
-
 });
 
-app.MapPut("/produtos{id}", ( int id, Produto produtoAtualizado ) =>
+app.MapPut("/produtos/{id}", (int id, Produto produtoAtualizado) =>
 {
-    var produto = Produtos.FirstOrDefault((x) => x.Id == id);
-    
-    if ( produto is  null)
-    {
-        return Results.NotFound($"Produtos ID:{id} não encontrado ");
-    }
-    else
-    {
-
-        produto.Nome = produtoAtualizado.Nome;
-        produto.Preco = produtoAtualizado.Preco;
-        produto.Estoque = produtoAtualizado.Estoque;
-
-        return Results.Ok($"Produto {produto} Atualizado men");
-    }
-
-});
-
-
-app.MapDelete("/Produtos/{id}", (int id) =>
-{
-
-    var produto = Produtos.FirstOrDefault((x) => x.Id == id);
+    var produto = produtos.FirstOrDefault(x => x.Id == id);
 
     if (produto is null)
     {
-        return Results.NotFound($"Produtos ID:{id} não encontrado ");
-    }
-    else
-    {
-        Produtos.Remove(produto);
-        return Results.Ok($"Produto {produto} Removido");
+        return Results.NotFound($"Produto com ID {id} não encontrado.");
     }
 
+    produto.Nome = produtoAtualizado.Nome;
+    produto.Preco = produtoAtualizado.Preco;
+    produto.Estoque = produtoAtualizado.Estoque;
+
+    return Results.Ok(produto);
 });
 
+app.MapDelete("/produtos/{id}", (int id) =>
+{
+    var produto = produtos.FirstOrDefault(x => x.Id == id);
 
+    if (produto is null)
+    {
+        return Results.NotFound($"Produto com ID {id} não encontrado.");
+    }
+
+    produtos.Remove(produto);
+
+    return Results.NoContent();
+});
 
 app.Run();
 
 record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
 {
     public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
-
-public class Produto
-{
-    public int Id { get; set; }
-    public string Nome { get; set; } = "";
-    public decimal Preco { get; set; }
-    public int Estoque { get; set; }
 }

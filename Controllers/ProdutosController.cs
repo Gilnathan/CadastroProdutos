@@ -1,14 +1,22 @@
 using CadastroProdutos.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using CadastroProdutos.Models;
 
 namespace CadastroProdutos.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ProdutosController : ControllerBase
     {
-        private ProdutosService produtosService = new ProdutosService();
+        private IProdutosService produtosService;
+
+        public ProdutosController(IProdutosService produtosService)
+        {
+            this.produtosService = produtosService;
+        }
 
         [HttpGet]
         public ActionResult<List<Produto>> Get()
@@ -16,61 +24,68 @@ namespace CadastroProdutos.Controllers
             return Ok(produtosService.ObterTodos());
         }
 
-
         [HttpGet("{id}")]
         public ActionResult<Produto> GetById(int id)
         {
-            var produto = produtosService.ProdutoID(id);
+            var produto = produtosService.ObterPorId(id);
 
             if (produto is null)
             {
-                return NotFound("Achei nada men");
-
-            }
-            else
-            {
-                return produto;
+                return NotFound($"Produto com ID {id} não encontrado");
             }
 
+            return Ok(produto);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
-        public ActionResult Post(Produto NewProduto)
+        public ActionResult Post(Produto novoProduto)
         {
-            produtosService.AdicionarProduto(NewProduto);
-            return Created();
-        }
-        
-
-        [HttpPut("id")]
-        public ActionResult Put(int id, Produto produtoAtualizado)
-        {
-            var statusAtualizacao = produtosService.Atualizar(id, produtoAtualizado );
-
-            if (statusAtualizacao)
+            try
             {
-                return Ok("Produto Atualizado");             
-            }
+                produtosService.Adicionar(novoProduto);
 
-            return NotFound($"Não encontrei o produto com ID:{id}");
+                return Created();
+            }
+            catch(Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
         }
 
+        [Authorize(Roles = "admin")]
+        [HttpPut("{id}")]
+        public ActionResult<Produto> Put(int id, Produto produtoAtualizado)
+        {
+            try
+            {
+                var produto = produtosService.Atualizar(id, produtoAtualizado);
 
+                if (produto is null)
+                {
+                    return NotFound($"Produto com ID {id} não encontrado.");
+                }
+
+                return Ok(produto);
+            }
+            catch(Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
+        }
+
+        [Authorize(Roles = "admin")]
         [HttpDelete("{id}")]
-        public ActionResult Delete( int id )
+        public ActionResult Delete(int id)
         {
-
-            var StatusRemocao = produtosService.Remover(id);
-
-            if (StatusRemocao)
-            {
-                return Ok("Produto Removido");
-            }
-            return NoContent();
+            var deletou = produtosService.Remover(id);
             
+            if (deletou == false)
+            {
+                return NotFound($"Produto com ID {id} não encontrado.");
+            }
+
+            return NoContent();
         }
-    
-    
     }
-    
 }

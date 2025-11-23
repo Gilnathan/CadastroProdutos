@@ -1,50 +1,50 @@
 using System;
+using CadastroProdutos.Models;
 
 namespace CadastroProdutos.Services;
 
-public class ProdutosService
+public class ProdutosService : IProdutosService
 {
     private static List<Produto> produtos = new List<Produto>()
-        {
-            new Produto(){ Id = 1, Nome = "Mouse sem fio", Preco =40.90M, Estoque = 50 },
-            new Produto(){ Id = 2, Nome = "Teclado sem fio", Preco =20.90M, Estoque = 20 }
-        };
+    {
+        new Produto() { Id = 1, Nome = "Mouse sem fio", Preco = 99.90M, Estoque = 50 },
+        new Produto() { Id = 2, Nome = "Teclado", Preco = 249.90M, Estoque = 30 }
+    };
 
     public List<Produto> ObterTodos()
     {
         return produtos;
     }
 
-    public Produto ProdutoID(int id)
+    public Produto ObterPorId(int id)
     {
-        return produtos.FirstOrDefault((x) => x.Id == id);
+        return produtos.FirstOrDefault(x => x.Id == id);
     }
 
-    public void AdicionarProduto(Produto produto)
+    public void Adicionar(Produto novoProduto)
     {
-        produtos.Add(produto);
-        
+        produtos.Add(novoProduto);
     }
 
-    public bool Atualizar(int id, Produto ProdutoAtualizado)
+    public Produto Atualizar(int id, Produto produtoAtualizado)
     {
-        var produto = produtos.FirstOrDefault((x) => x.Id == id);
+        var produto = produtos.FirstOrDefault(x => x.Id == id);
 
         if (produto is null)
         {
-            return false;
+            return null;
         }
 
-        produto.Nome = ProdutoAtualizado.Nome;
-        produto.Preco = ProdutoAtualizado.Preco;
-        produto.Estoque = ProdutoAtualizado.Estoque;
+        produto.Nome = produtoAtualizado.Nome;
+        produto.Preco = produtoAtualizado.Preco;
+        produto.Estoque = produtoAtualizado.Estoque;
 
-        return true;
+        return produto;
     }
-    
+
     public bool Remover(int id)
     {
-        var produto = produtos.FirstOrDefault((x) => x.Id == id);
+        var produto = produtos.FirstOrDefault(x => x.Id == id);
 
         if (produto is null)
         {
@@ -52,9 +52,7 @@ public class ProdutosService
         }
 
         produtos.Remove(produto);
+
         return true;
     }
-
-
-
 }

@@ -1,31 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\gilth\\OneDrive\\Documentos\\GitHub\\CadastroProdutos\\CadastroProdutos.csproj": {}
+    "C:\\Cursos\\Backend\\CadastroProdutos\\CadastroProdutos.csproj": {}
   },
   "projects": {
-    "C:\\Users\\gilth\\OneDrive\\Documentos\\GitHub\\CadastroProdutos\\CadastroProdutos.csproj": {
+    "C:\\Cursos\\Backend\\CadastroProdutos\\CadastroProdutos.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\gilth\\OneDrive\\Documentos\\GitHub\\CadastroProdutos\\CadastroProdutos.csproj",
+        "projectUniqueName": "C:\\Cursos\\Backend\\CadastroProdutos\\CadastroProdutos.csproj",
         "projectName": "CadastroProdutos",
-        "projectPath": "C:\\Users\\gilth\\OneDrive\\Documentos\\GitHub\\CadastroProdutos\\CadastroProdutos.csproj",
-        "packagesPath": "C:\\Users\\gilth\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\gilth\\OneDrive\\Documentos\\GitHub\\CadastroProdutos\\obj\\",
+        "projectPath": "C:\\Cursos\\Backend\\CadastroProdutos\\CadastroProdutos.csproj",
+        "packagesPath": "C:\\Users\\juare\\.nuget\\packages\\",
+        "outputPath": "C:\\Cursos\\Backend\\CadastroProdutos\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\gilth\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\juare\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -44,23 +38,41 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[9.0.4, )"
+            },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
-              "version": "[9.0.8, )"
+              "version": "[9.0.3, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[9.0.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.4, )"
             },
             "Swashbuckle.AspNetCore.SwaggerGen": {
               "target": "Package",
-              "version": "[9.0.6, )"
+              "version": "[8.1.1, )"
             },
             "Swashbuckle.AspNetCore.SwaggerUI": {
               "target": "Package",
-              "version": "[9.0.6, )"
+              "version": "[8.1.1, )"
             }
           },
           "imports": [
@@ -82,7 +94,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.202/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
