@@ -4,16 +4,6 @@
 📦 API Cadastro de Produtos
 Uma API RESTful simples desenvolvida com ASP.NET Core 9.0 para gerenciamento de um cadastro de produtos, utilizando EF Core com SQLite para persistência de dados e autenticação JWT para controle de acesso.
 
-🚀 CadastroProdutos - API .NET
-Olá! Com base nos arquivos que você enviou, criei um modelo de arquivo README.md que você pode usar para o seu repositório Git.
-
-Este README assume que este é um projeto de backend ASP.NET Core 9.0 (baseado no CadastroProdutos.csproj e Program.cs) que implementa uma API REST para Cadastro de Produtos e um sistema de Login com autenticação JWT.
-
-Sinta-se à vontade para copiar, colar e personalizar!
-
-📦 API Cadastro de Produtos
-Uma API RESTful simples desenvolvida com ASP.NET Core 9.0 para gerenciamento de um cadastro de produtos, utilizando EF Core com SQLite para persistência de dados e autenticação JWT para controle de acesso.
-
 ✨ Recursos
 API RESTful: Endpoints para operações CRUD de produtos.
 
